@@ -1,0 +1,26 @@
+import { getApp, getApps, initializeApp, type FirebaseApp } from "firebase/app";
+import { getAnalytics, isSupported, type Analytics } from "firebase/analytics";
+
+// Config web của Firebase là thông tin công khai (dùng ở client), không phải secret.
+const firebaseConfig = {
+  apiKey: "AIzaSyACOCAIoUvnL1VmZ5wolqISYioedmwdFL4",
+  authDomain: "trandangtan-8d317.firebaseapp.com",
+  projectId: "trandangtan-8d317",
+  storageBucket: "trandangtan-8d317.firebasestorage.app",
+  messagingSenderId: "651632601206",
+  appId: "1:651632601206:web:1f9000b8e98eaf79175757",
+  measurementId: "G-TW3B33B7CH",
+};
+
+export const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
+
+let analytics: Analytics | null = null;
+
+/** Analytics chỉ chạy trên trình duyệt; trả về null khi chạy server hoặc trình duyệt không hỗ trợ. */
+export async function getAnalyticsSafe(): Promise<Analytics | null> {
+  if (typeof window === "undefined") return null;
+  if (analytics) return analytics;
+  if (!(await isSupported())) return null;
+  analytics = getAnalytics(app);
+  return analytics;
+}

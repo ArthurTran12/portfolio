@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-preahvihear), ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-jakarta: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #11071f;
+  --color-header: #1a0b2e;
+  --color-accent: #7127ba;
+  --color-accent-light: #a362ff;
+  --color-accent-soft: #9857d3;
+  --color-slate-text: #ccd6f6;
+  --color-card: #2c1250;
+  --color-card-edge: #4f228d;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-ink);
+  color: #fff;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-display);
+  overflow-x: hidden;
 }
+
+/* Gradient nền của card kinh nghiệm (lấy từ design) */
+.exp-card-1 {
+  background-image: linear-gradient(137.87deg, #130428 19.946%, #251043 67.641%, #38126d 107.08%, #261045 156.61%, #190634 183.21%);
+}
+.exp-card-2 {
+  background-image: linear-gradient(106.07deg, #130428 0.585%, #251043 16.317%, #38126d 29.327%, #261045 45.664%, #190634 54.438%);
+}
+.exp-card-3 {
+  background-image: linear-gradient(106.07deg, #130428 0.585%, #251043 16.317%, #38126d 29.327%, #261045 45.664%, #190634 54.438%);
+}
+.exp-card-4 {
+  background-image: linear-gradient(168.9deg, #130428 37.22%, #251043 70.43%, #38126d 97.891%, #261045 132.38%, #190634 150.9%);
+}
+
+/* Card mô tả dự án: radial gradient + texture noise */
+.project-card {
+  background-color: rgba(26, 11, 46, 0.6);
+  background-image: radial-gradient(ellipse 60% 140% at 15% 20%, rgba(105, 59, 147, 0.2), rgba(110, 191, 244, 0.05) 75%, transparent 100%);
+  backdrop-filter: blur(40px);
+}
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url("/figma/card-noise.png") top left / 925px 462px;
+  mix-blend-mode: overlay;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.caret {
+  animation: blink 1s steps(1) infinite;
+}
+

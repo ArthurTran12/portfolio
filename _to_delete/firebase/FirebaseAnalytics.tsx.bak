@@ -1,0 +1,12 @@
+"use client";
+
+import { useEffect } from "react";
+import { getAnalyticsSafe } from "@/lib/firebase";
+
+/** Khởi tạo Firebase Analytics một lần khi trang tải (tự ghi nhận page_view). */
+export default function FirebaseAnalytics() {
+  useEffect(() => {
+    void getAnalyticsSafe();
+  }, []);
+  return null;
+}
